@@ -38,9 +38,11 @@ const zipWith = function*(f, xs, ys) {
 
 const dot = (xs, ys) => {
   let sum = 0;
-  for (let z of zipWith((x, y) => x * y, xs, ys))
+  for (let z of zipWith((x, y) => x * y, xs, ys)) {
+    console.log(z);
     sum += z;
-  return z;
+  }
+  return sum;
 };
 
 const generateTestData = function(n) {
@@ -48,17 +50,18 @@ const generateTestData = function(n) {
     const x2 = doubleIn(-1, 1);
     const y1 = doubleIn(-1, 1);
     const y2 = doubleIn(-1, 1);
-    const ws = [x2 * y1 - x1 * y2, y2-y1, x2-x1];
-
+    const ws = [(x2 * y1 - x1 * y2), y2-y1, x1-x2];
     let list = [];
 
+    console.log(ws);
     for (let i = 0; i < n; i++) {
         const x = doubleIn(-1, 1);
         const y = doubleIn(-1, 1);
         const v = [1, x, y];
+        console.log(x,y);
         list.push([v, sign(dot(ws, v))]);
     }
-    return list;
+    return [ws, list];
 };
 
-let list = generateTestData(100000);
+let [ws, list] = generateTestData(5);
